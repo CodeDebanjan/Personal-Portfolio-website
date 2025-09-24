@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debanjan Mondal - Personal Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f0c29;
+            background-image: linear-gradient(315deg, #0f0c29 0%, #302b63 74%, #24243e 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            cursor: none; /* Hide the default cursor */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        /* Custom animated cursor */
+        .cursor-dot, .cursor-outline {
+            pointer-events: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 9999;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out, transform 0.1s ease-out;
+        }
+        .cursor-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #a78bfa;
+        }
+        .cursor-outline {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #a78bfa80;
+        }
+
+        /* Glassmorphism effect */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Animated section reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Typing effect cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1em;
+            background-color: #a78bfa;
+            animation: blink 1s infinite;
+            margin-left: 4px;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Add scale effect to cursor on hoverable elements */
+        .cursor-outline.hovered {
+            transform: translate(-50%, -50%) scale(1.5);
+             background-color: #a78bfa30;
+        }
+    </style>
+</head>
+
+<body class="text-gray-200 antialiased">
+    <div class="cursor-dot" data-cursor-dot></div>
+    <div class="cursor-outline" data-cursor-outline></div>
+
+    <!-- Header & Navigation -->
+    <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center glass-card mt-4 rounded-xl">
+            <a href="#" class="text-2xl font-bold text-white tracking-wider hoverable">DM ;)</a>
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-gray-300 hover:text-violet-400 transition duration-300 hoverable">About</a>
+                <a href="#projects" class="text-gray-300 hover:text-violet-400 transition duration-300 hoverable">Projects</a>
+                <a href="#skills" class="text-gray-300 hover:text-violet-400 transition duration-300 hoverable">Skills</a>
+                <a href="Debanjan_Mondal_Resume (1).pdf" class="bg-violet-600 hover:bg-violet-700 text-white font-medium py-2 px-4 rounded-lg transition duration-300 hoverable">My CV</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-300 focus:outline-none hoverable">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 glass-card mx-6 rounded-b-lg">
+            <a href="#about" class="block py-2 text-gray-300 hover:text-violet-400 hoverable">About</a>
+            <a href="#projects" class="block py-2 text-gray-300 hover:text-violet-400 hoverable">Projects</a>
+            <a href="#skills" class="block py-2 text-gray-300 hover:text-violet-400 hoverable">Skills</a>
+            <a href="#contact" class="block mt-2 bg-violet-600 hover:bg-violet-700 text-white font-medium py-2 px-4 rounded-lg text-center hoverable">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pt-32">
+        <!-- Hero Section -->
+        <section id="hero" class="min-h-[calc(100vh-8rem)] flex items-center">
+            <div class="max-w-4xl">
+                <p class="text-lg text-violet-400 mb-2">Hello, I am, </p>
+                <h1 class="text-5xl md:text-7xl font-extrabold text-white leading-tight mb-4">
+                   Debanjan Mondal.
+                </h1>
+                <h2 class="text-4xl md:text-6xl font-extrabold text-gray-400 leading-tight mb-8">
+                   I build things for <span id="typing-text" class="text-violet-400"></span><span class="typing-cursor"></span>
+                </h2>
+                <p class="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl">
+                    I'm a software engineer specializing in building exceptional digital experiences. Currently, I'm focused on building accessible, human-centered products.
+                </p>
+                <a href="https://wa.me/+919932644695" class="bg-violet-600 hover:bg-violet-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 transform hover:scale-105 hoverable">
+                    Get In Touch
+                </a>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20 md:py-32 reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-white text-center"><span class="text-violet-400">About</span>Me</h2>
+            <div class="grid md:grid-cols-5 gap-12 items-start">
+                <div class="md:col-span-3">
+                    <p class="text-gray-400 mb-4 leading-relaxed">
+                        Hello! I'm Debanjan, a passionate developer with a knack for creating clean, efficient, and user-friendly digital experiences. I have honed my skills in front-end and back-end development, allowing me to build comprehensive solutions from the ground up. I am going through many projects on app development.
+                    </p>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        My journey in tech began with a curiosity for how things work, which quickly blossomed into a career. I thrive on challenges and am constantly learning new technologies to stay at the forefront of the ever-evolving web development landscape.
+                    </p>
+                     <p class="text-gray-400 mb-6 leading-relaxed">Here are a few technologies I've been working with recently:</p>
+                     <ul class="grid grid-cols-2 gap-2 text-gray-400">
+                        <li class="flex items-center gap-2"><span class="text-violet-400">&#9656;</span>HTML</li>
+                        <li class="flex items-center gap-2"><span class="text-violet-400">&#9656;</span>CSS</li>
+                        <li class="flex items-center gap-2"><span class="text-violet-400">&#9656;</span>JavaScript</li>
+                        <li class="flex items-center gap-2"><span class="text-violet-400">&#9656;</span>C Programming</li>
+                        <li class="flex items-center gap-2"><span class="text-violet-400">&#9656;</span>Python</li>
+                        <li class="flex items-center gap-2"><span class="text-violet-400">&#9656;</span>Java</li>
+                        <li class="flex items-center gap-2"><span class="text-violet-400">&#9656;</span>Kali Linux</li>
+                     </ul>
+                </div>
+                <div class="md:col-span-2 relative">
+                    <div class="w-full h-auto rounded-lg overflow-hidden group">
+                        <img src="me.jpeg" alt="Debanjan Mondal Portrait" class="rounded-lg w-full object-cover transition-transform duration-300 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-violet-500/30 group-hover:bg-transparent transition-all duration-300"></div>
+                    </div>
+                     <div class="absolute -top-4 -left-4 w-full h-full border-2 border-violet-400 rounded-lg -z-10 transition-transform duration-300 group-hover:translate-x-2 group-hover:translate-y-2"></div>
+                </div>
+            </div>
+        </section>
+
+<!-- Projects Section -->
+<section id="projects" class="py-20 md:py-32 reveal">
+    <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
+        <span class="text-violet-400">Some Things</span>  I've Built
+    </h2>
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Project 1 -->
+        <div class="glass-card rounded-lg overflow-hidden shadow-lg hoverable" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+            <img src="weather.png" alt="Project One" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 text-white">Weather-wise</h3>
+                <p class="text-gray-400 mb-4 text-sm">A full-featured weather application that provides real-time weather updates, forecasts, and alerts using API.</p>
+                <div class="flex flex-wrap gap-2 text-xs mb-4"><span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                <a href="https://codedebanjan.github.io/Weather-check/" class="font-semibold text-violet-400 hover:text-violet-300">View Project &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Project 2 -->
+        <div class="glass-card rounded-lg overflow-hidden shadow-lg hoverable" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+            <img src="flip.png" alt="Project Two" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 text-white">Flip & Decide</h3>
+                <p class="text-gray-400 mb-4 text-sm">An interactive coin toss game.</p>
+                <div class="flex flex-wrap gap-2 text-xs mb-4"><span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                <a href="https://codedebanjan.github.io/Coin-Toss/" class="font-semibold text-violet-400 hover:text-violet-300">View Project &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Project 3 -->
+        <div class="glass-card rounded-lg overflow-hidden shadow-lg hoverable" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+            <img src="todo.png" alt="Project Three" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 text-white">What To-Do</h3>
+                <p class="text-gray-400 mb-4 text-sm">A simple to-do list application to help users manage their tasks effectively.</p>
+                <div class="flex flex-wrap gap-2 text-xs mb-4"><span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                <a href="https://codedebanjan.github.io/To-Do-List/" class="font-semibold text-violet-400 hover:text-violet-300">View Project &rarr;</a>
+            </div>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="glass-card rounded-lg overflow-hidden shadow-lg hoverable" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+            <img src="trackmoney.png" alt="Project Four" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 text-white">Expense Tracker</h3>
+                <p class="text-gray-400 mb-4 text-sm">A responsive expense tracking application to help users manage their finances effectively with pie chart and bar graph visualizations.</p>
+                <div class="flex flex-wrap gap-2 text-xs mb-4"><span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                <a href="https://codedebanjan.github.io/Expense-Tracker/" class="font-semibold text-violet-400 hover:text-violet-300">View Project &rarr;</a>
+            </div>
+        </div>
+        <!-- Project 5 -->
+        <div class="glass-card rounded-lg overflow-hidden shadow-lg hoverable" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+            <img src="hardware.png" alt="Project Five" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 text-white">Hand-Gesture Controlled Car</h3>
+                <p class="text-gray-400 mb-4 text-sm">A hand-gesture controlled car using JavaScript and TensorFlow.js for real-time object detection.</p>
+                <div class="flex flex-wrap gap-2 text-xs mb-4"> <span>C Programming</span> <span>Arduino</span></div>
+                <a href="tech.pptx" class="font-semibold text-violet-400 hover:text-violet-300">View Project &rarr;</a>
+            </div>
+        </div>
+        <!-- Project 6 -->
+        <div class="glass-card rounded-lg overflow-hidden shadow-lg hoverable" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+            <img src="wish.png" alt="Project Six" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 text-white">Birthday Wish Generator</h3>
+                <p class="text-gray-400 mb-4 text-sm">A birthday wish that creates birthday wishes with pictures.</p>
+                <div class="flex flex-wrap gap-2 text-xs mb-4"><span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                <a href="https://codedebanjan.github.io/birthday-wish/" class="font-semibold text-violet-400 hover:text-violet-300">View Project &rarr;</a>
+            </div>
+        </div>
+     
+        <!-- Project 7 -->
+        <div class="glass-card rounded-lg overflow-hidden shadow-lg hoverable" data-tilt data-tilt-max="5" data-tilt-speed="400" data-tilt-perspective="1000">
+            <img src="codeKuizr.jpg" alt="Project Seven" class="w-full h-48 object-cover">
+            <div class="p-6">
+                <h3 class="text-xl font-bold mb-2 text-white">CodeKuizr</h3>
+                <p class="text-gray-400 mb-4 text-sm">A simple and intuitive quiz application built with JavaScript to help users test their knowledge in programming.</p>
+                <div class="flex flex-wrap gap-2 text-xs mb-4"><span>HTML</span> <span>CSS</span> <span>JavaScript</span></div>
+                <a href="https://codedebanjan.github.io/CodeKuizr/" class="font-semibold text-violet-400 hover:text-violet-300">View Project &rarr;</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+        <!-- Skills Section is omitted for brevity but can be added in a similar style -->
+            <!-- Skills Section -->
+        <section id="skills" class="py-20 md:py-32 reveal">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-white text-center">
+                <span class="text-violet-400">My</span> Skills
+            </h2>
+            <div class="max-w-4xl mx-auto space-y-6">
+                <!-- Skill Item -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-300">HTML</span>
+                        <span class="text-gray-400">92%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                        <div class="bg-violet-500 h-3 rounded-full skill-bar" style="width: 92%"></div>
+                    </div>
+                </div>
+                <!-- Skill Item -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-300">CSS</span>
+                        <span class="text-gray-400">85%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                        <div class="bg-violet-500 h-3 rounded-full skill-bar" style="width: 85%"></div>
+                    </div>
+                </div>
+                <!-- Skill Item -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-300">JavaScript</span>
+                        <span class="text-gray-400">80%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                        <div class="bg-violet-500 h-3 rounded-full skill-bar" style="width: 80%"></div>
+                    </div>
+                </div>
+                <!-- Skill Item -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-300">C Programming</span>
+                        <span class="text-gray-400">80%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                        <div class="bg-violet-500 h-3 rounded-full skill-bar" style="width: 80%"></div>
+                    </div>
+                </div>
+                <!-- Skill Item -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-300">Python</span>
+                        <span class="text-gray-400">70%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                        <div class="bg-violet-500 h-3 rounded-full skill-bar" style="width: 70%"></div>
+                    </div>
+                </div>
+                <!-- Skill Item -->
+                <div>
+                    <div class="flex justify-between mb-2">
+                        <span class="text-gray-300">Java</span>
+                        <span class="text-gray-400">20%</span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-3 overflow-hidden">
+                        <div class="bg-violet-500 h-3 rounded-full skill-bar" style="width: 20%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Contact Section -->
+         <!-- Contact Section -->
+<section id="contact" class="py-20 md:py-32 reveal">
+  <div class="max-w-2xl mx-auto text-center">
+    <h2 class="text-2xl md:text-3xl font-bold mb-4 text-white">
+      <span class="text-violet-400">What's</span>  Next?
+    </h2>
+    <h3 class="text-4xl md:text-5xl font-bold mb-4 text-white">Get In Touch</h3>
+    <p class="text-gray-400 mb-8">
+      I'm currently open to new opportunities. Whether you have a question or just want to say hi, I'll get back to you!
+    </p>
+
+    <!-- Contact Form -->
+    <form action="https://formspree.io/f/xgvnejzd" method="POST" class="space-y-4">
+      <input 
+        type="text" 
+        name="name" 
+        placeholder="Your Name" 
+        required
+        class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-violet-400 outline-none"
+      >
+      <input 
+        type="email" 
+        name="email" 
+        placeholder="Your Email" 
+        required
+        class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-violet-400 outline-none"
+      >
+      <textarea 
+        name="message" 
+        rows="4" 
+        placeholder="Your Message" 
+        required
+        class="w-full px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:border-violet-400 outline-none"
+      ></textarea>
+      <button 
+        type="submit"
+        class="w-full bg-transparent border-2 border-violet-400 text-violet-400 font-bold py-3 px-8 rounded-lg transition duration-300 hover:bg-violet-400/10 hoverable"
+      >
+        Send Message
+      </button>
+    </form>
+  </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-transparent">
+        <div class="container mx-auto px-6 py-8 flex flex-col items-center">
+            <div class="flex space-x-6 mb-4">
+                <a href="https://github.com/CodeDebanjan" class="text-gray-400 hover:text-violet-400 transition duration-300 hoverable">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-github"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/></svg>
+                </a>
+                <a href="https://www.linkedin.com/in/debanjan-mondal-033077319/" class="text-gray-400 hover:text-violet-400 transition duration-300 hoverable">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-linkedin"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">Designed & Built by Debanjan413</p>
+        </div>
+    </footer>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.2/vanilla-tilt.min.js"></script>
+    <script>
+        // Custom cursor logic
+        const cursorDot = document.querySelector("[data-cursor-dot]");
+        const cursorOutline = document.querySelector("[data-cursor-outline]");
+        window.addEventListener("mousemove", function(e) {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            cursorDot.style.left = `${posX}px`;
+            cursorDot.style.top = `${posY}px`;
+            cursorOutline.style.left = `${posX}px`;
+            cursorOutline.style.top = `${posY}px`;
+            cursorDot.style.opacity = '1';
+            cursorOutline.style.opacity = '1';
+        });
+        
+        document.querySelectorAll('.hoverable').forEach(el => {
+            el.addEventListener('mouseover', () => cursorOutline.classList.add('hovered'));
+            el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hovered'));
+        });
+
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Typing text animation
+        const typingText = document.getElementById('typing-text');
+        const phrases = ["the web.", "cool apps.", "great experiences."];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentPhrase = phrases[phraseIndex];
+            if (isDeleting) {
+                typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = 150;
+            if(isDeleting) typeSpeed /= 2;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+            
+            setTimeout(type, typeSpeed);
+        }
+        document.addEventListener('DOMContentLoaded', type);
+
+        // Fade-in sections on scroll
+        const sections = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+        // Initialize VanillaTilt.js
+        VanillaTilt.init(document.querySelectorAll("[data-tilt]"), {
+		    glare: true,
+		    "max-glare": 0.2
+	    });
+    </script>
+</body>
+</html>
+
